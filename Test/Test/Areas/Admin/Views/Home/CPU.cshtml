@@ -1,0 +1,136 @@
+﻿@{
+    Layout = "_Layout";
+}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        </div>
+
+        <p></p>
+
+        <div class="container">
+
+            <div class="row">
+
+
+
+                <div class="col-md-12">
+                    <form>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label for="inputCPU">Mã CPU</label>
+                                <input type="text" readonly class="form-control-plaintext" id="staticCPUCode" value="I71165G7">
+                            </div>
+
+                            <div class="form-group col-md-1">
+                                <label for="inputCore">Số nhân</label>
+                                <input type="number" class="form-control" id="inputCore" placeholder="04">
+                            </div>
+
+                            <div class="form-group col-md-1">
+                            </div>
+
+                            <div class="form-group col-md-1">
+                                <label for="inputThread">Số luồng</label>
+                                <input type="number" class="form-control" id="inputThread" placeholder="08">
+                            </div>
+
+                            <div class="form-group col-md-1">
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="inputBaseCore">Xung cơ bản (Ghz)</label>
+                                <input type="number" class="form-control" id="inputBaseCore" placeholder="2.8">
+                            </div>
+
+
+
+                            <div class="form-group col-md-2">
+                                <label for="inputMaxCore">Xung tối đa (Ghz)</label>
+                                <input type="number" class="form-control" id="inputMaxCore" placeholder="4.7">
+                            </div>
+
+                            <div class="form-group col-md-1">
+                            </div>
+
+                            <div class="form-group col-md-1">
+                                <label for="inputCPUCache">CPU Cache</label>
+                                <input type="number" class="form-control" id="inputCPUCache" placeholder="12">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <label for="exampleFormControlTextarea2">Công nghệ CPU</label>
+                                <textarea class="form-control" id="exampleFormControlTextarea2" rows="3"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6"></div>
+                            <div class="form-group col-md-2 center">
+                                <button type="button" class="btn btn-primary">Thêm</button>
+                            </div>
+
+                            <div class="form-group col-md-2 center">
+                                <button type="button" class="btn btn-secondary">Cập nhật</button>
+                            </div>
+
+                            <div class="form-group col-md-2 center">
+                                <button type="button" class="btn btn-danger">Xóa</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th width="15%">Mã CPU</th>
+                            <th width="10%">Số nhân</th>
+                            <th width="10%">Số luồng</th>
+                            <th width="10%">Xung cơ bản</th>
+                            <th width="10%">Xung tối đa</th>
+                            <th width="10%">CPU Cache</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th width="15%">Mã CPU</th>
+                            <th width="10%">Số nhân</th>
+                            <th width="10%">Số luồng</th>
+                            <th width="10%">Xung cơ bản</th>
+                            <th width="10%">Xung tối đa</th>
+                            <th width="10%">CPU Cache</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <td>i71165G7</td>
+                            <td>4</td>
+                            <td>8</td>
+                            <td>2.8</td>
+                            <td>4.7</td>
+                            <td>12mb</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

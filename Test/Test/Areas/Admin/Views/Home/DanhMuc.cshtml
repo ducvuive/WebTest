@@ -1,0 +1,79 @@
+﻿@{
+    Layout = "_Layout";
+}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        </div>
+
+        <p></p>
+
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-md-12">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label for="inputBrand">Danh mục</label>
+                                <input type="text" class="form-control" id="inputBrand" placeholder="Dell">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-1 center">
+                                <button type="button" class="btn btn-primary">Thêm</button>
+                            </div>
+
+                            <div class="form-group col-md-2 center">
+                                <button type="button" class="btn btn-secondary">Cập nhật</button>
+                            </div>
+
+                            <div class="form-group col-md-1 center">
+                                <button type="button" class="btn btn-danger">Xóa</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+
+
+            </div>
+
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th width="20%">Mã danh mục</th>
+                            <th width="60%">Tên danh mục</th>
+                            <th width="20%">Số sản phẩm</th>
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th width="20%">Mã danh mục</th>
+                            <th width="60%">Tên danh mục</th>
+                            <th width="20%">Số sản phẩm</th>
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <td>DELL</td>
+                            <td>DELL</td>
+                            <td>50</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

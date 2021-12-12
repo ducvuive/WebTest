@@ -1,0 +1,123 @@
+﻿@{
+    Layout = "_Layout";
+}
+<div class="container-fluid">
+
+    <!-- Page Heading -->
+    <!-- DataTales Example -->
+    <div class="card shadow mb-4">
+
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+        </div>
+
+        <p></p>
+
+        <div class="container">
+
+            <div class="row">
+
+
+
+                <div class="col-md-12">
+                    <form>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <label for="inputRAM">Mã RAM</label>
+                                <input type="text" readonly class="form-control-plaintext" id="staticRAMCode" value="DDR4L">
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="inputRAMCapacity">Dung lượng</label>
+                                <input type="number" class="form-control" id="inputRAMCapacity" placeholder="16">
+                            </div>
+
+                            <div class="form-group col-md-1">
+                            </div>
+
+                            <div class="form-group col-md-1">
+                                <label for="inputRAMType">Loại ram</label>
+                                <input type="text" class="form-control" id="inputRAMType" placeholder="DDR4">
+                            </div>
+
+                            <div class="form-group col-md-1">
+                            </div>
+
+                            <div class="form-group col-md-1">
+                                <label for="inputBus">Bus ram</label>
+                                <input type="number" class="form-control" id="inputBus" placeholder="3200">
+                            </div>
+
+                            <div class="form-group col-md-1">
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                <label for="inputMaxRAM">Hỗ trợ tối đa</label>
+                                <input type="text" class="form-control" id="inputMaxRAM" placeholder="16gb">
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group col-md-6"></div>
+                            <div class="form-group col-md-2 center">
+                                <button type="button" class="btn btn-primary">Thêm</button>
+                            </div>
+
+                            <div class="form-group col-md-2 center">
+                                <button type="button" class="btn btn-secondary">Cập nhật</button>
+                            </div>
+
+                            <div class="form-group col-md-2 center">
+                                <button type="button" class="btn btn-danger">Xóa</button>
+                            </div>
+                        </div>
+
+                    </form>
+
+                </div>
+
+
+            </div>
+
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th width="15%">Mã RAM</th>
+                            <th width="10%">Dung lượng</th>
+                            <th width="10%">Loại RAM</th>
+                            <th width="10%">Bus RAM</th>
+                            <th width="10%">Hỗ trợ tối đa</th>
+
+                        </tr>
+                    </thead>
+                    <tfoot>
+                        <tr>
+                            <th width="15%">Mã RAM</th>
+                            <th width="10%">Dung lượng</th>
+                            <th width="10%">Loại RAM</th>
+                            <th width="10%">Bus RAM</th>
+                            <th width="10%">Hỗ trợ tối đa</th>
+
+                        </tr>
+                    </tfoot>
+                    <tbody>
+                        <tr>
+                            <td>DDR4L</td>
+                            <td>16gb</td>
+                            <td>DDR4</td>
+                            <td>3200mhz</td>
+                            <td>16</td>
+
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>

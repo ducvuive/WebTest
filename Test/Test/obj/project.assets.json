@@ -9280,11 +9280,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\FileGit\\Test1\\Test\\Test\\Test.csproj",
+      "projectUniqueName": "E:\\FileGit\\WebTest\\Test\\Test\\Test.csproj",
       "projectName": "Test",
-      "projectPath": "E:\\FileGit\\Test1\\Test\\Test\\Test.csproj",
+      "projectPath": "E:\\FileGit\\WebTest\\Test\\Test\\Test.csproj",
       "packagesPath": "C:\\Users\\PC\\.nuget\\packages\\",
-      "outputPath": "E:\\FileGit\\Test1\\Test\\Test\\obj\\",
+      "outputPath": "E:\\FileGit\\WebTest\\Test\\Test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\PC\\AppData\\Roaming\\NuGet\\NuGet.Config",

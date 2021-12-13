@@ -1864,10 +1864,12 @@ textarea.form-control {
 	color: rgba(255,255,255,.8);
 	background: #4e4e4e;
 	background: $black;
+	margin-top: 2em;
 	.ftco-footer-logo {
 		text-transform: uppercase;
 		letter-spacing: .1em;
 	}
+
 	.ftco-footer-widget {
 		h2 {
 			font-weight: normal;
@@ -1878,19 +1880,23 @@ textarea.form-control {
 			letter-spacing: 3px;
 			color: $white;
 		}
-		ul{
-			li{
+
+		ul {
+			li {
 				font-size: 14px;
 				margin-bottom: 0px;
-				a{
+
+				a {
 					color: rgba(255,255,255,.8);
 				}
 			}
 		}
-		.btn-primary{
+
+		.btn-primary {
 			// background: $white !important;
 			border: 2px solid $white !important;
-			&:hover{
+
+			&:hover {
 				// background: $white;
 				border: 2px solid $white !important;
 			}

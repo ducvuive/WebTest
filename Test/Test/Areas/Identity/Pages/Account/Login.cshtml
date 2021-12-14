@@ -95,7 +95,7 @@
           rel="stylesheet">
 
     <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="~/css/sb-admin-2.css" rel="stylesheet">
 
 </head>
 
@@ -118,14 +118,16 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
                                     </div>
-                                    <form class="user">
+                                    <form class="user"  id="account" method="post">
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user"
                                                    id="exampleInputEmail" aria-describedby="emailHelp"
+                                                   asp-for="Input.Email"
                                                    placeholder="Enter Email Address...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
+                                                   asp-for="Input.Password"
                                                    id="exampleInputPassword" placeholder="Password">
                                         </div>
                                         <div class="form-group">
@@ -135,11 +137,15 @@
                                                     Remember
                                                     Me
                                                 </label>
+                                              @*  <label asp-for="Input.RememberMe"  class="custom-control-label">
+                                                    <input asp-for="Input.RememberMe" class="custom-control-input"/>
+                                                    @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                                </label>*@
                                             </div>
                                         </div>
-                                        <a href="index.html" class="btn btn-primary btn-user btn-block">
+                                        <button class="btn btn-primary btn-user btn-block" type="submit">
                                             Login
-                                        </a>
+                                        </button>
                                         <hr>
                                         <a href="index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Login with Google
@@ -150,10 +156,10 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                        <a class="small"  id="forgot-password" asp-page="./ForgotPassword">Forgot Password?</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
+                                        <a class="small"  asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Create an Account!</a>
                                     </div>
                                 </div>
                             </div>

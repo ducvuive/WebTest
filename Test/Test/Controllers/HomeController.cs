@@ -12,15 +12,41 @@ namespace Test.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly LapTopContext _context;
+        public HomeController(ILogger<HomeController> logger, LapTopContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            //  List<Sanpham> SP = new List<Sanpham>();
+            //var ketqua = (from sp in _context.Sanpham                         
+            //              select new 
+            //             {
+            //                 sp.Tensp,
+            //                 sp.Dongia,
+            //                 sp.Hinhanh,
+            //                 sp.BoxulyNavigation.Congnghecpu,
+            //                 sp.RamNavigation.Dungluongram,
+            //                 sp.RamNavigation.Loairam,
+            //                 sp.ManhinhNavigation.Kichthuoc,
+            //                 sp.ManhinhNavigation.Dophangiai
+            //              }).Take(8).ToList();
+            List<Sanpham> listdata = _context.Sanpham.Where(sp => sp.Ramat == 2021).Select(sp => new Sanpham
+            {
+               Tensp = sp.Tensp,
+               Dongia = sp.Dongia,
+               Hinhanh = sp.Hinhanh,
+               BoxulyNavigation = sp.BoxulyNavigation,
+               RamNavigation= sp.RamNavigation,
+               ManhinhNavigation =  sp.ManhinhNavigation,
+
+            }).Take(8).ToList();
+
+
+            return View(listdata);
         }
 
         public IActionResult Privacy()

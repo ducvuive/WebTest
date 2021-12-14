@@ -21,19 +21,7 @@ namespace Test.Controllers
 
         public IActionResult Index()
         {
-            //  List<Sanpham> SP = new List<Sanpham>();
-            //var ketqua = (from sp in _context.Sanpham                         
-            //              select new 
-            //             {
-            //                 sp.Tensp,
-            //                 sp.Dongia,
-            //                 sp.Hinhanh,
-            //                 sp.BoxulyNavigation.Congnghecpu,
-            //                 sp.RamNavigation.Dungluongram,
-            //                 sp.RamNavigation.Loairam,
-            //                 sp.ManhinhNavigation.Kichthuoc,
-            //                 sp.ManhinhNavigation.Dophangiai
-            //              }).Take(8).ToList();
+            
             List<Sanpham> listdata = _context.Sanpham.Where(sp => sp.Ramat == 2021).Select(sp => new Sanpham
             {
                Tensp = sp.Tensp,

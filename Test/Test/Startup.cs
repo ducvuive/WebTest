@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
@@ -31,8 +31,10 @@ namespace Test
             services.AddDbContext<LapTopContext>(options =>
                 options.UseMySQL(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<LapTopContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+                .AddEntityFrameworkStores<LapTopContext>()
+                .AddDefaultTokenProviders()
+                .AddDefaultUI();
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
             services.AddRazorPages();
@@ -41,7 +43,7 @@ namespace Test
             {
                 // Password settings
                 options.Password.RequireDigit = true;//yeu cau so 0-9
-                options.Password.RequiredLength = 10;
+                options.Password.RequiredLength = 3;
                 options.Password.RequireNonAlphanumeric = true;// co ki tu dac biet
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
@@ -56,7 +58,7 @@ namespace Test
                 options.User.RequireUniqueEmail = true;
             });
         }
-
+            
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
@@ -84,8 +86,28 @@ namespace Test
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapAreaControllerRoute(
+                  name: "areas",
+                  areaName: "Admin",
+                  pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
+
                 endpoints.MapRazorPages();
             });
+
+            /*app.UseEndpoints(endpoints =>
+            {​​​
+           *//* endpoints.MapAreaControllerRoute(
+            name: "areas",
+            areaName: "Admin",
+            pattern: "Admin/{​​​controller=Home}​​​/{​​​action=Index}​​​/{​​​id?}​​​");*//*
+
+                endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{​​​controller=Home}​​​/{​​​action=Index}​​​/{​​​id?}​​​");
+
+
+            }​​​);*/
         }
     }
 }

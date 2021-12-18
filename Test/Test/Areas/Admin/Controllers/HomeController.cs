@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace DoAn_CuaHangLaptop.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "admin")]
     public class HomeController : Controller
     {
         public IActionResult Index()

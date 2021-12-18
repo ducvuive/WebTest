@@ -11,7 +11,7 @@ using Test.Data;
 
 namespace App.Admin.Role
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "admin")]
     public class DeleteModel : RolePageModel
     {
         public DeleteModel(RoleManager<IdentityRole> roleManager, LapTopContext myBlogContext) : base(roleManager, myBlogContext)

@@ -12,7 +12,7 @@ namespace App.Admin.User
 {
 
     /*[Authorize]*/
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "admin")]
     public class IndexModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;

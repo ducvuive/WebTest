@@ -11,7 +11,7 @@ using Test.Data;
 
 namespace App.Admin.Role
 {
-    /*[Authorize(Roles = "Admin")]*/
+    [Authorize(Roles = "admin")]
 
     public class CreateModel : RolePageModel
     {
@@ -45,7 +45,7 @@ namespace App.Admin.Role
                 return Page();
             }
 
-            var newRole = new IdentityRole(Input.Name);
+            var newRole = new IdentityRole(Input.Name.ToLower());
             var result = await _roleManager.CreateAsync(newRole);
             if (result.Succeeded)
             {

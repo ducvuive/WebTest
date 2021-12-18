@@ -11,7 +11,7 @@ using Test.Data;
 
 namespace App.Admin.Role
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "admin")]
 
     public class EditModel : RolePageModel
     {

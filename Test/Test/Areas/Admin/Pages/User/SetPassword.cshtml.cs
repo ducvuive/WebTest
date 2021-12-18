@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace App.Admin.User
 {
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "admin")]
     public class SetPasswordModel : PageModel
     {
         private readonly UserManager<IdentityUser> _userManager;

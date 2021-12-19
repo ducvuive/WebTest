@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 using Test.Data;
 using Test.Models;
 
@@ -17,6 +20,39 @@ namespace Test.Controllers
         private readonly LapTopContext _context;
 
         private readonly IConfiguration _configuration;
+
+        private readonly ILogger<SanphamController> _logger;
+
+        // Key lưu chuỗi json của Cart
+        public const string CARTKEY = "cart";
+
+        //// Lấy cart từ Session (danh sách giỏ hàng)
+        List<GioHang> GetCartItems()
+        {
+
+            var session = HttpContext.Session;
+            string jsoncart = session.GetString(CARTKEY);
+            if (jsoncart != null)
+            {
+                return JsonConvert.DeserializeObject<List<GioHang>>(jsoncart);
+            }
+            return new List<GioHang>();
+        }
+
+        //// Xóa giỏ khỏi session
+        void ClearCart()
+        {
+            var session = HttpContext.Session;
+            session.Remove(CARTKEY);
+        }
+
+        //// Lưu Cart (Danh sách giỏ hàng) vào session
+        void SaveCartSession(List<GioHang> ls)
+        {
+            var session = HttpContext.Session;
+            string jsoncart = JsonConvert.SerializeObject(ls);
+            session.SetString(CARTKEY, jsoncart);
+        }
         public SanphamController(LapTopContext context, IConfiguration config)
         {
             _context = context;
@@ -385,5 +421,77 @@ namespace Test.Controllers
 
             return View(sanpham);
         }
+
+        //Hiển thị card
+        public IActionResult Cart()
+        {
+            return View(GetCartItems());
+        }
+
+      // Thêm sản phẩm vô cart
+        public IActionResult AddToCart([FromRoute] string id)
+        {
+
+            var sanpham = _context.Sanpham
+                .Where(p => p.Masp == id)
+                .FirstOrDefault();
+
+            if (sanpham == null)
+                return NotFound("Không có sản phẩm");
+
+            // Xử lý đưa vào Cart ...
+            var cart = GetCartItems();
+            var cartitem = cart.Find(p => p.Sanpham.Masp == id);
+            if (cartitem != null)
+            {
+                // Đã tồn tại, tăng thêm 1
+                cartitem.SL++;
+                Console.WriteLine("ok 1 ");
+            }
+            else
+            {
+                //  Thêm mới
+                cart.Add(new GioHang() { SL = 1, Sanpham = sanpham });
+                Console.WriteLine("ok 2");
+            }
+
+            // Lưu cart vào Session
+            SaveCartSession(cart);
+
+            // Chuyển đến trang hiện thị Cart
+            return RedirectToAction(nameof(Cart));
+        }
+
+        /// xóa item trong cart
+        
+        public IActionResult RemoveCart([FromRoute] string id)
+        {
+            var cart = GetCartItems();
+            var cartitem = cart.Find(p => p.Sanpham.Masp == id);
+            if (cartitem != null)
+            {
+               
+                cart.Remove(cartitem);
+            }
+
+            SaveCartSession(cart);
+            return RedirectToAction(nameof(Cart));
+        }
+
+        [HttpPost]
+        public IActionResult UpdateCart([FromForm] string id, [FromForm] int SL)
+        {
+            // Cập nhật Cart thay đổi số lượng quantity ...
+            var cart = GetCartItems();
+            var cartitem = cart.Find(p => p.Sanpham.Masp == id);
+            if (cartitem != null)
+            {
+                cartitem.SL = SL;
+            }
+            SaveCartSession(cart);
+            // Trả về mã thành công (không có nội dung gì - chỉ để Ajax gọi)
+            return Ok();
+        }
+
     }
 }

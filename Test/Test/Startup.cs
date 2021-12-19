@@ -38,7 +38,7 @@ namespace Test
                 .AddEntityFrameworkStores<LapTopContext>();
              */
                
-            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<LapTopContext>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI();
@@ -47,8 +47,8 @@ namespace Test
             services.AddRazorPages();
 
             services.AddDistributedMemoryCache();            // Đăng ký dịch vụ lưu cache trong bộ nhớ (Session sẽ sử dụng nó)
-                services.AddSession((option) =>
-                {                                                // Đăng ký dịch vụ Session
+            services.AddSession((option) =>
+            {                                                // Đăng ký dịch vụ Session
                     option.Cookie.Name = "LaptopStore";             // Đặt tên Session - tên này sử dụng ở Browser (Cookie)
                     option.IdleTimeout = new TimeSpan(0, 30, 0);    // Thời gian tồn tại của Session
                 });

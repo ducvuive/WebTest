@@ -7,18 +7,19 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Test.Models;
 
 namespace App.Admin.User
 {
     [Authorize(Roles = "admin")]
     public class SetPasswordModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
         public SetPasswordModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            UserManager<AppUser> userManager,
+            SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -44,7 +45,7 @@ namespace App.Admin.User
             public string ConfirmPassword { get; set; }
         }
 
-        public IdentityUser user { get; set; }
+        public AppUser user { get; set; }
         
         public async Task<IActionResult> OnGetAsync(string id)
         {

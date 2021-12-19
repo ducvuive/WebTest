@@ -39,6 +39,14 @@ namespace Test
             services.AddHttpContextAccessor();
             services.AddRazorPages();
 
+            services.AddDistributedMemoryCache();            // Đăng ký dịch vụ lưu cache trong bộ nhớ (Session sẽ sử dụng nó)
+            services.AddSession((option) =>
+            {                                                // Đăng ký dịch vụ Session
+                option.Cookie.Name = "LaptopStore";             // Đặt tên Session - tên này sử dụng ở Browser (Cookie)
+                option.IdleTimeout = new TimeSpan(0, 30, 0);    // Thời gian tồn tại của Session
+            });
+
+
             services.Configure<IdentityOptions>(options =>
             {
                 // Password settings
@@ -75,6 +83,8 @@ namespace Test
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSession();
 
             app.UseRouting();
 

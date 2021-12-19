@@ -24,6 +24,7 @@ namespace Test.Controllers
             
             List<Sanpham> listdata = _context.Sanpham.Where(sp => sp.Ramat == 2021).Select(sp => new Sanpham
             {
+               Masp = sp.Masp,
                Tensp = sp.Tensp,
                Dongia = sp.Dongia,
                Hinhanh = sp.Hinhanh,

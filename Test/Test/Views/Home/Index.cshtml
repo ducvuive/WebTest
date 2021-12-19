@@ -1,4 +1,4 @@
-﻿@model List<Test.Models.Sanpham>
+﻿@model IEnumerable<Test.Models.Sanpham>
 @{
     ViewData["Title"] = "Home Page";
     
@@ -145,7 +145,7 @@
                                     </p>
                                 </div>
                             </div>
-                            <h3><a href="#">@item.Tensp</a></h3>
+                            <h3><a asp-controller="Sanpham" asp-action="ProductSingle" asp-route-id="@item.Masp">@item.Tensp</a></h3>
                             <div class="pricing">
                                 <p class="price"><span>@item.Dongia?.ToString("#,##0 VNĐ")</span></p>
                             </div>

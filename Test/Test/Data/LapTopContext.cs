@@ -10,7 +10,7 @@ using Test.Models;
 
 namespace Test.Data
 {
-    public partial class LapTopContext : IdentityDbContext
+    public partial class LapTopContext : IdentityDbContext<AppUser>
     {
         public LapTopContext()
         {
@@ -33,6 +33,7 @@ namespace Test.Data
         public virtual DbSet<Sanpham> Sanpham { get; set; }
         public virtual DbSet<Sukien> Sukien { get; set; }
         public virtual DbSet<Taikhoan> Taikhoan { get; set; }
+        public virtual DbSet<AppUser> AppUser { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

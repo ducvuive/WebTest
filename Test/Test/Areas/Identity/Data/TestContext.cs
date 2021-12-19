@@ -5,10 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Test.Models;
 
 namespace Test.Data
 {
-    public class TestContext : IdentityDbContext<IdentityUser>
+    public class TestContext : IdentityDbContext<AppUser>
     {
         public TestContext(DbContextOptions<TestContext> options)
             : base(options)

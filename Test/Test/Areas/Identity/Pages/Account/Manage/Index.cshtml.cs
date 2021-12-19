@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using Test.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,12 +12,12 @@ namespace Test.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
         public IndexModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager)
+            UserManager<AppUser> userManager,
+            SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -33,23 +34,45 @@ namespace Test.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Phone]
-            [Display(Name = "Phone number")]
+            [Display(Name = "Số điện thoại")]
             public string PhoneNumber { get; set; }
+             
+
+            [MaxLength (100)]
+            [Display(Name = "Họ tên đầy đủ")]
+            public string FullName { set; get; }
+            [MaxLength (255)]
+            [Display(Name = "Địa chỉ")]
+            public string Address { set; get; }
+
+            [DataType (DataType.Date)]
+            [Display(Name = "Ngày sinh d/m/y")]
+            // [ModelBinder(BinderType=typeof(DayMonthYearBinder))]
+            [DisplayFormat(ApplyFormatInEditMode=true, DataFormatString = "{0:dd/MM/yyyy}")]
+            public DateTime? Birthday { set; get; }
+            [Display(Name = "Giới tính")]
+            public string gioitinh { set; get; }
+            
         }
 
-        private async Task LoadAsync(IdentityUser user)
+        
+        private async Task LoadAsync(AppUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-
+            
             Username = userName;
 
             Input = new InputModel
             {
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                Birthday = user.Birthday,
+                Address = user.Address,
+                FullName = user.FullName,
+                gioitinh = user.gioitinh
             };
         }
-
+        
         public async Task<IActionResult> OnGetAsync()
         {
             var user = await _userManager.GetUserAsync(User);
@@ -86,6 +109,14 @@ namespace Test.Areas.Identity.Pages.Account.Manage
                     return RedirectToPage();
                 }
             }
+            user.Address  = Input.Address;
+            user.Birthday = Input.Birthday;
+            user.FullName = Input.FullName;
+            user.gioitinh = Input.gioitinh;
+            await _userManager.UpdateAsync(user);
+            
+           
+            await _userManager.UpdateAsync(user);
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";

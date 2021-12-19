@@ -16,6 +16,12 @@
                 @Html.DisplayNameFor(model => model.Ngayhd)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Nguoinhan)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sdt)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Diachigiaohang)
             </th>
             <th>
@@ -27,9 +33,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.MakhNavigation)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ManvNavigation)
-            </th>
+            @*<th>
+            @Html.DisplayNameFor(model => model.ManvNavigation)
+        </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.MaskNavigation)
             </th>
@@ -43,6 +49,12 @@
                 @Html.DisplayFor(modelItem => item.Ngayhd)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Nguoinhan)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sdt)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Diachigiaohang)
             </td>
             <td>
@@ -54,9 +66,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.MakhNavigation.Makh)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ManvNavigation.Manv)
-            </td>
+            @*<td>
+            @Html.DisplayFor(modelItem => item.ManvNavigation.Manv)
+        </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.MaskNavigation.Mask)
             </td>

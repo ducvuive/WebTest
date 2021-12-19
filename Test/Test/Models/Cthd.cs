@@ -9,7 +9,7 @@ namespace Test.Models
 {
     public partial class Cthd
     {
-        public string Mahd { get; set; }
+        public int Mahd { get; set; }
         public string Masp { get; set; }
         public int? Soluong { get; set; }
 

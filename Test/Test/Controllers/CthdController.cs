@@ -27,7 +27,7 @@ namespace Test.Controllers
         }
 
         // GET: Cthd/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null)
             {
@@ -73,7 +73,7 @@ namespace Test.Controllers
         }
 
         // GET: Cthd/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
             {
@@ -95,7 +95,7 @@ namespace Test.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Mahd,Masp,Soluong")] Cthd cthd)
+        public async Task<IActionResult> Edit(int id, [Bind("Mahd,Masp,Soluong")] Cthd cthd)
         {
             if (id != cthd.Mahd)
             {
@@ -128,7 +128,7 @@ namespace Test.Controllers
         }
 
         // GET: Cthd/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null)
             {
@@ -150,7 +150,7 @@ namespace Test.Controllers
         // POST: Cthd/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var cthd = await _context.Cthd.FindAsync(id);
             _context.Cthd.Remove(cthd);
@@ -158,7 +158,7 @@ namespace Test.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CthdExists(string id)
+        private bool CthdExists(int id)
         {
             return _context.Cthd.Any(e => e.Mahd == id);
         }

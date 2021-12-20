@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +24,8 @@ namespace Test.Controllers
         private readonly IConfiguration _configuration;
 
         private readonly ILogger<SanphamController> _logger;
+
+        private readonly UserManager<IdentityUser> _userManager;
 
         // Key lưu chuỗi json của Cart
         public const string CARTKEY = "cart";
@@ -53,11 +57,18 @@ namespace Test.Controllers
             string jsoncart = JsonConvert.SerializeObject(ls);
             session.SetString(CARTKEY, jsoncart);
         }
-        public SanphamController(LapTopContext context, IConfiguration config)
+        public SanphamController(LapTopContext context, IConfiguration config, UserManager<IdentityUser> userManager)
         {
             _context = context;
             _configuration = config;
+            _userManager = userManager;
         }
+
+        private async Task<IdentityUser> GetCurrentUser()
+        {
+            return await _userManager.GetUserAsync(HttpContext.User);
+        }
+
 
         // GET: Sanpham
         public async Task<IActionResult> Index()
@@ -493,5 +504,99 @@ namespace Test.Controllers
             return Ok();
         }
 
+        public IActionResult CheckOut([FromForm] string email, [FromForm] string address)
+        {
+            var cart = GetCartItems();
+            //if (!string.IsNullOrEmpty(email))
+            //{
+            //    // hãy tạo cấu trúc db lưu lại đơn hàng và xóa cart khỏi session
+
+            //    ClearCart();
+            //    RedirectToAction(nameof(Index));
+            //}
+
+            return View(cart);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CheckOutAsync([FromForm] string hoten, [FromForm] string diachi, [FromForm] string sdt, [FromForm] string email)
+        {
+            Console.WriteLine("vô hàm thử");
+            Console.WriteLine("{0}", hoten);
+            Console.WriteLine("{0}", diachi);
+            Console.WriteLine("{0}", sdt);
+            Console.WriteLine("{0}", email);
+         
+            //Xử lý khi đặt hàng
+            var cart = GetCartItems();
+            ViewData["email"] = email;
+            ViewData["address"] = diachi;
+            ViewData["phone"] = sdt;
+            ViewData["cart"] = cart;
+            
+            foreach (var item in cart)
+            {
+                Console.WriteLine("{0}", item.SL);
+            }
+
+            var id = from hoadon in _context.Hoadon
+                      orderby hoadon.Mahd descending
+                      select hoadon.Mahd;
+            int temp;
+            if (id.Count() == 0)
+            {
+                temp = 1;
+            }
+            else
+            {              
+                temp = id.First();
+                temp++;
+            }
+            Console.WriteLine("{0}",temp);
+            if (!string.IsNullOrEmpty(email))
+            {
+                Hoadon hd = new Hoadon();
+                long? total = 0;
+                hd.Mahd = temp;
+                hd.Nguoinhan = hoten;
+                hd.Diachigiaohang = diachi;
+                hd.Sdt = sdt;
+                var user = await GetCurrentUser();
+                hd.Makh = user.Id;
+                foreach (var item in cart)
+                {
+                    total += item.Sanpham.Dongia * item.SL;
+                }
+                hd.Tongtien = total;
+                if (hd.Mask != null)
+                {
+                    hd.Thanhtien = total - total * hd.MaskNavigation.Phantramgiamgia;
+                }
+                else
+                {
+                    hd.Thanhtien = hd.Tongtien;
+                }
+                hd.Trangthai = 0; // chờ xử lý
+                hd.nhanvienmanv = "";
+                _context.Hoadon.Add(hd);
+                _context.SaveChanges();
+                int lastID = hd.Mahd;
+
+                foreach (var item in cart)
+                {
+                    Cthd ct = new Cthd();
+                    ct.Mahd = lastID;
+                    ct.Masp = item.Sanpham.Masp;
+                    ct.Soluong = item.SL;
+                    _context.Add(ct);
+                    _context.SaveChanges();
+                }
+                Console.WriteLine("vô rồi đó");
+                ClearCart();
+                RedirectToAction(nameof(Index));
+            }
+
+            return Redirect("/Home/Index");
+        }
     }
 }

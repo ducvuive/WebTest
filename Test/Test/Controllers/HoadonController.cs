@@ -22,12 +22,12 @@ namespace Test.Controllers
         // GET: Hoadon
         public async Task<IActionResult> Index()
         {
-            var lapTopContext = _context.Hoadon.Include(h => h.MakhNavigation).Include(h => h.ManvNavigation).Include(h => h.MaskNavigation);
+            var lapTopContext = _context.Hoadon.Include(h => h.MakhNavigation)/*.Include(h => h.ManvNavigation).Include(h => h.MaskNavigation)*/;
             return View(await lapTopContext.ToListAsync());
         }
 
         // GET: Hoadon/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(int id)
         {
             if (id == null)
             {
@@ -36,7 +36,7 @@ namespace Test.Controllers
 
             var hoadon = await _context.Hoadon
                 .Include(h => h.MakhNavigation)
-                .Include(h => h.ManvNavigation)
+                //.Include(h => h.ManvNavigation)
                 .Include(h => h.MaskNavigation)
                 .FirstOrDefaultAsync(m => m.Mahd == id);
             if (hoadon == null)
@@ -51,7 +51,7 @@ namespace Test.Controllers
         public IActionResult Create()
         {
             ViewData["Makh"] = new SelectList(_context.Khachhang, "Makh", "Makh");
-            ViewData["Manv"] = new SelectList(_context.Nhanvien, "Manv", "Manv");
+            //ViewData["Manv"] = new SelectList(_context.Nhanvien, "Manv", "Manv");
             ViewData["Mask"] = new SelectList(_context.Sukien, "Mask", "Mask");
             return View();
         }
@@ -61,7 +61,7 @@ namespace Test.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Mahd,Makh,Manv,Mask,Ngayhd,Diachigiaohang,Tongtien,Thanhtien")] Hoadon hoadon)
+        public async Task<IActionResult> Create([Bind("Mahd,Makh,Mask,Ngayhd,Nguoinhan,Sdt,Diachigiaohang,Tongtien,Thanhtien,Trangthai")] Hoadon hoadon)
         {
             if (ModelState.IsValid)
             {
@@ -70,13 +70,13 @@ namespace Test.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Makh"] = new SelectList(_context.Khachhang, "Makh", "Makh", hoadon.Makh);
-            ViewData["Manv"] = new SelectList(_context.Nhanvien, "Manv", "Manv", hoadon.Manv);
+            //ViewData["Manv"] = new SelectList(_context.Nhanvien, "Manv", "Manv", hoadon.Manv);
             ViewData["Mask"] = new SelectList(_context.Sukien, "Mask", "Mask", hoadon.Mask);
             return View(hoadon);
         }
 
         // GET: Hoadon/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(int id)
         {
             if (id == null)
             {
@@ -89,7 +89,7 @@ namespace Test.Controllers
                 return NotFound();
             }
             ViewData["Makh"] = new SelectList(_context.Khachhang, "Makh", "Makh", hoadon.Makh);
-            ViewData["Manv"] = new SelectList(_context.Nhanvien, "Manv", "Manv", hoadon.Manv);
+            //ViewData["Manv"] = new SelectList(_context.Nhanvien, "Manv", "Manv", hoadon.Manv);
             ViewData["Mask"] = new SelectList(_context.Sukien, "Mask", "Mask", hoadon.Mask);
             return View(hoadon);
         }
@@ -99,7 +99,7 @@ namespace Test.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Mahd,Makh,Manv,Mask,Ngayhd,Diachigiaohang,Tongtien,Thanhtien")] Hoadon hoadon)
+        public async Task<IActionResult> Edit(int id, [Bind("Mahd,Makh,Mask,Ngayhd,Nguoinhan,Sdt,Diachigiaohang,Tongtien,Thanhtien,Trangthai")] Hoadon hoadon)
         {
             if (id != hoadon.Mahd)
             {
@@ -127,13 +127,13 @@ namespace Test.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["Makh"] = new SelectList(_context.Khachhang, "Makh", "Makh", hoadon.Makh);
-            ViewData["Manv"] = new SelectList(_context.Nhanvien, "Manv", "Manv", hoadon.Manv);
+            //ViewData["Manv"] = new SelectList(_context.Nhanvien, "Manv", "Manv", hoadon.Manv);
             ViewData["Mask"] = new SelectList(_context.Sukien, "Mask", "Mask", hoadon.Mask);
             return View(hoadon);
         }
 
         // GET: Hoadon/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(int id)
         {
             if (id == null)
             {
@@ -142,7 +142,7 @@ namespace Test.Controllers
 
             var hoadon = await _context.Hoadon
                 .Include(h => h.MakhNavigation)
-                .Include(h => h.ManvNavigation)
+                //.Include(h => h.ManvNavigation)
                 .Include(h => h.MaskNavigation)
                 .FirstOrDefaultAsync(m => m.Mahd == id);
             if (hoadon == null)
@@ -156,7 +156,7 @@ namespace Test.Controllers
         // POST: Hoadon/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var hoadon = await _context.Hoadon.FindAsync(id);
             _context.Hoadon.Remove(hoadon);
@@ -164,7 +164,7 @@ namespace Test.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool HoadonExists(string id)
+        private bool HoadonExists(int id)
         {
             return _context.Hoadon.Any(e => e.Mahd == id);
         }

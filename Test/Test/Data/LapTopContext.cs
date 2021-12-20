@@ -207,8 +207,8 @@ namespace Test.Data
                 entity.HasIndex(e => e.Makh)
                     .HasName("FK_THUOC");
 
-                entity.HasIndex(e => e.Manv)
-                    .HasName("FK_LAP");
+                //entity.HasIndex(e => e.Manv)
+                //    .HasName("FK_LAP");
 
                 entity.HasIndex(e => e.Mask)
                     .HasName("FK_HD_SK");
@@ -228,11 +228,11 @@ namespace Test.Data
                     .HasMaxLength(6)
                     .IsFixedLength();
 
-                entity.Property(e => e.Manv)
-                    .IsRequired()
-                    .HasColumnName("MANV")
-                    .HasMaxLength(6)
-                    .IsFixedLength();
+                //entity.Property(e => e.Manv)
+                //    .IsRequired()
+                //    .HasColumnName("MANV")
+                //    .HasMaxLength(6)
+                //    .IsFixedLength();
 
                 entity.Property(e => e.Mask)
                     .HasColumnName("MASK")
@@ -253,11 +253,11 @@ namespace Test.Data
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_THUOC");
 
-                entity.HasOne(d => d.ManvNavigation)
-                    .WithMany(p => p.Hoadon)
-                    .HasForeignKey(d => d.Manv)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_LAP");
+                //entity.HasOne(d => d.ManvNavigation)
+                //    .WithMany(p => p.Hoadon)
+                //    .HasForeignKey(d => d.Manv)
+                //    .OnDelete(DeleteBehavior.ClientSetNull)
+                //    .HasConstraintName("FK_LAP");
 
                 entity.HasOne(d => d.MaskNavigation)
                     .WithMany(p => p.Hoadon)

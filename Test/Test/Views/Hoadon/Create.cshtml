@@ -19,20 +19,30 @@
             </div>
             <div class="form-group">
                 <label asp-for="Makh" class="control-label"></label>
-                <select asp-for="Makh" class ="form-control" asp-items="ViewBag.Makh"></select>
+                <select asp-for="Makh" class="form-control" asp-items="ViewBag.Makh"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="Manv" class="control-label"></label>
-                <select asp-for="Manv" class ="form-control" asp-items="ViewBag.Manv"></select>
-            </div>
+            @*<div class="form-group">
+            <label asp-for="Manv" class="control-label"></label>
+            <select asp-for="Manv" class ="form-control" asp-items="ViewBag.Manv"></select>
+        </div>*@
             <div class="form-group">
                 <label asp-for="Mask" class="control-label"></label>
-                <select asp-for="Mask" class ="form-control" asp-items="ViewBag.Mask"></select>
+                <select asp-for="Mask" class="form-control" asp-items="ViewBag.Mask"></select>
             </div>
             <div class="form-group">
                 <label asp-for="Ngayhd" class="control-label"></label>
                 <input asp-for="Ngayhd" class="form-control" />
                 <span asp-validation-for="Ngayhd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Nguoinhan" class="control-label"></label>
+                <input asp-for="Nguoinhan" class="form-control" />
+                <span asp-validation-for="Nguoinhan" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sdt" class="control-label"></label>
+                <input asp-for="Sdt" class="form-control" />
+                <span asp-validation-for="Sdt" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Diachigiaohang" class="control-label"></label>
@@ -48,6 +58,11 @@
                 <label asp-for="Thanhtien" class="control-label"></label>
                 <input asp-for="Thanhtien" class="form-control" />
                 <span asp-validation-for="Thanhtien" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trangthai" class="control-label"></label>
+                <input asp-for="Trangthai" class="form-control" />
+                <span asp-validation-for="Trangthai" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

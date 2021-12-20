@@ -14,17 +14,20 @@ namespace Test.Models
             Cthd = new HashSet<Cthd>();
         }
 
-        public string Mahd { get; set; }
+        public int Mahd { get; set; }
         public string Makh { get; set; }
-        public string Manv { get; set; }
+       // public string Manv { get; set; }
         public string Mask { get; set; }
         public DateTime? Ngayhd { get; set; }
+        public string Nguoinhan { get; set; }
+        public string nhanvienmanv { get; set; }
+        public string Sdt { get; set; }
         public string Diachigiaohang { get; set; }
-        public int? Tongtien { get; set; }
-        public int? Thanhtien { get; set; }
-
+        public long? Tongtien { get; set; }
+        public long? Thanhtien { get; set; }
+        public int Trangthai { get; set; }
         public virtual Khachhang MakhNavigation { get; set; }
-        public virtual Nhanvien ManvNavigation { get; set; }
+       // public virtual Nhanvien ManvNavigation { get; set; }
         public virtual Sukien MaskNavigation { get; set; }
         public virtual ICollection<Cthd> Cthd { get; set; }
     }

@@ -8,48 +8,49 @@ using Microsoft.EntityFrameworkCore;
 using Test.Data;
 using Test.Models;
 
-namespace Test.Controllers
+namespace Test.Areas.Admin.Controllers
 {
-    public class DanhmucsanphamController : Controller
+    [Area("Admin")]
+    public class DanhMucSanPhamController : Controller
     {
         private readonly LapTopContext _context;
 
-        public DanhmucsanphamController(LapTopContext context)
+        public DanhMucSanPhamController(LapTopContext context)
         {
             _context = context;
         }
 
-        // GET: Danhmucsanpham
+        // GET: Admin/DanhMucSanPham
         public async Task<IActionResult> Index()
         {
             return View(await _context.Danhmucsanpham.ToListAsync());
         }
 
-        // GET: Danhmucsanpham/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        // GET: Admin/DanhMucSanPham/Details/5
+        //public async Task<IActionResult> Details(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var danhmucsanpham = await _context.Danhmucsanpham
-                .FirstOrDefaultAsync(m => m.Madm == id);
-            if (danhmucsanpham == null)
-            {
-                return NotFound();
-            }
+        //    var danhmucsanpham = await _context.Danhmucsanpham
+        //        .FirstOrDefaultAsync(m => m.Madm == id);
+        //    if (danhmucsanpham == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(danhmucsanpham);
-        }
+        //    return View(danhmucsanpham);
+        //}
 
-        // GET: Danhmucsanpham/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
+        // GET: Admin/DanhMucSanPham/Create
+        //public IActionResult Create()
+        //{
+        //    return View();
+        //}
 
-        // POST: Danhmucsanpham/Create
+        // POST: Admin/DanhMucSanPham/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -60,12 +61,14 @@ namespace Test.Controllers
             {
                 _context.Add(danhmucsanpham);
                 await _context.SaveChangesAsync();
+                TempData["AlertMessage"] = "Tạo thành công";
+                TempData["AlertType"] = "alert alert-success";
                 return RedirectToAction(nameof(Index));
             }
             return View(danhmucsanpham);
         }
 
-        // GET: Danhmucsanpham/Edit/5
+        // GET: Admin/DanhMucSanPham/Edit/5
         public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
@@ -81,7 +84,7 @@ namespace Test.Controllers
             return View(danhmucsanpham);
         }
 
-        // POST: Danhmucsanpham/Edit/5
+        // POST: Admin/DanhMucSanPham/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -99,6 +102,8 @@ namespace Test.Controllers
                 {
                     _context.Update(danhmucsanpham);
                     await _context.SaveChangesAsync();
+                    TempData["AlertMessage"] = "Cập nhật thành công";
+                    TempData["AlertType"] = "alert alert-success";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -116,38 +121,46 @@ namespace Test.Controllers
             return View(danhmucsanpham);
         }
 
-        // GET: Danhmucsanpham/Delete/5
-        public async Task<IActionResult> Delete(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
+        // GET: Admin/DanhMucSanPham/Delete/5
+        //public async Task<IActionResult> Delete(string id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            var danhmucsanpham = await _context.Danhmucsanpham
-                .FirstOrDefaultAsync(m => m.Madm == id);
-            if (danhmucsanpham == null)
-            {
-                return NotFound();
-            }
+        //    var danhmucsanpham = await _context.Danhmucsanpham
+        //        .FirstOrDefaultAsync(m => m.Madm == id);
+        //    if (danhmucsanpham == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return View(danhmucsanpham);
-        }
+        //    return View(danhmucsanpham);
+        //}
 
-        // POST: Danhmucsanpham/Delete/5
+        // POST: Admin/DanhMucSanPham/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> Delete(string Madm)
         {
-            var danhmucsanpham = await _context.Danhmucsanpham.FindAsync(id);
+            var danhmucsanpham = await _context.Danhmucsanpham.FindAsync(Madm);
             _context.Danhmucsanpham.Remove(danhmucsanpham);
             await _context.SaveChangesAsync();
+            TempData["AlertMessage"] = "Xóa thành công";
+            TempData["AlertType"] = "alert alert-success";
             return RedirectToAction(nameof(Index));
         }
 
         private bool DanhmucsanphamExists(string id)
         {
             return _context.Danhmucsanpham.Any(e => e.Madm == id);
+        }
+        [HttpPost]
+        public JsonResult timDanhMuc(string id)
+        {
+            var dm = _context.Danhmucsanpham.Find(id);;
+            return Json(dm);
         }
     }
 }

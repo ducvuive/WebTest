@@ -78,6 +78,7 @@ namespace Test
                 options.User.RequireUniqueEmail = true;
                 options.SignIn.RequireConfirmedAccount = true;
             });
+            services.AddMvc(options => options.EnableEndpointRouting = false);
         }
             
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -111,12 +112,14 @@ namespace Test
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
 
-                endpoints.MapAreaControllerRoute(
-                  name: "areas",
-                  areaName: "Admin",
-                  pattern: "Admin/{controller=Home}/{action=Index}/{id?}");
-
                 endpoints.MapRazorPages();
+            });
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                  name: "Admin",
+                  template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+                );
             });
 
             /*app.UseEndpoints(endpoints =>

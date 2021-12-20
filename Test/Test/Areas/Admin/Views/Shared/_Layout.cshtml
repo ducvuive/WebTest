@@ -1,5 +1,4 @@
 ﻿
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -47,58 +46,54 @@
             </a>
 
             <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
+            <!--<hr class="sidebar-divider my-0">-->
             <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
+            <!--<li class="nav-item">
                 <a class="nav-link" href="index.html">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
-            </li>
-
+            </li>-->
             <!-- Divider -->
-            <hr class="sidebar-divider">
-
+            <!--<hr class="sidebar-divider">-->
             <!-- Heading -->
-            <div class="sidebar-heading">
+            <!--<div class="sidebar-heading">
                 Interface
-            </div>
-
+            </div>-->
             <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                   aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Components</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Buttons</a>
-                        <a class="collapse-item" href="cards.html">Cards</a>
+            @*<li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                       aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Components</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Custom Components:</h6>
+                            <a class="collapse-item" href="buttons.html">Buttons</a>
+                            <a class="collapse-item" href="cards.html">Cards</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>*@
 
             <!-- Nav Item - Utilities Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                   aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
-                </a>
-                <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
-                     data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Custom Utilities:</h6>
-                        <a class="collapse-item" href="utilities-color.html">Colors</a>
-                        <a class="collapse-item" href="utilities-border.html">Borders</a>
-                        <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                        <a class="collapse-item" href="utilities-other.html">Other</a>
+            @*<li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
+                       aria-expanded="true" aria-controls="collapseUtilities">
+                        <i class="fas fa-fw fa-wrench"></i>
+                        <span>Utilities</span>
+                    </a>
+                    <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
+                         data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Custom Utilities:</h6>
+                            <a class="collapse-item" href="utilities-color.html">Colors</a>
+                            <a class="collapse-item" href="utilities-border.html">Borders</a>
+                            <a class="collapse-item" href="utilities-animation.html">Animations</a>
+                            <a class="collapse-item" href="utilities-other.html">Other</a>
+                        </div>
                     </div>
-                </div>
-            </li>
+                </li>*@
 
             <!-- Divider -->
             <hr class="sidebar-divider">
@@ -112,7 +107,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item" id="DanhMuc">
-                <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="DanhMuc">
+                <a class="nav-link" href="~/admin/danhmucsanpham">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Danh mục</span>
                 </a>
@@ -120,7 +115,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item" id="CPU">
-                <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="CPU">
+                <a class="nav-link" href="~/admin/boxuly">
                     <i class="fas fa-fw fa-table"></i>
                     <span>CPU</span>
                 </a>
@@ -128,7 +123,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item" id="RAM">
-                <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="RAM">
+                <a class="nav-link" href="~/admin/bonhoram">
                     <i class="fas fa-fw fa-table"></i>
                     <span>RAM</span>
                 </a>
@@ -136,7 +131,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item" id="ManHinh">
-                <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="ManHinh">
+                <a class="nav-link" href="~/admin/manhinh">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Màn hình</span>
                 </a>
@@ -144,7 +139,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item" id="CongKetNoi">
-                <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="CongKetNoi">
+                <a class="nav-link" href="~/admin/congketnoi">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Cổng kết nối</span>
                 </a>
@@ -152,7 +147,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item active" id="ChiTietSanPham">
-                <a class="nav-link" asp-area="Admin" asp-controller="Home" asp-action="ChiTietSanPham">
+                <a class="nav-link" href="~/admin/sanpham">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Chi tiết sản phẩm</span>
                 </a>
@@ -315,7 +310,7 @@
     <script src="~/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <!-- Page level custom scripts -->
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js" type="text/javascript"></script>
@@ -327,7 +322,7 @@
     </script>
     <script src="~/js/demo/datatables-demo.js"></script>
     <script src="~/js/sub-main.js"></script>
-
+    @RenderSection("Scripts", required: false)
 </body>
 
 </html>

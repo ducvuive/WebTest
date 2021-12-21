@@ -1,6 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
+
 @inject SignInManager<AppUser> SignInManager
 @inject UserManager<AppUser> UserManager
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -30,7 +32,19 @@
     <link rel="stylesheet" href="~/css/icomoon.css">
     <link rel="stylesheet" href="~/css/style.css">
     <link rel="stylesheet" href="~/css/css/mod-style.css" />
-
+    <style>
+        .form-inline .nav-link {
+            font-size: 10px;
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+            /* padding-left: 20px; */
+            /* padding-right: 20px; */
+            font-weight: 400;
+            /* color: #000000; */
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+    </style>
 </head>
 <body class="goto-here">
     <div class="py-1 bg-black">
@@ -77,18 +91,25 @@
                         </li>
                         <li class="nav-item">
                             <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                                <button type="submit" class="nav-link btn btn-link text-dark">Đăng xuất</button>
                             </form>
+
                         </li>
                         <li class="nav-item cta cta-colored"><a asp-controller="SanPham" asp-action="Cart" class="nav-link"><span class="icon-shopping_cart"></span></a></li>
                     }
                     else
                     {
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Đăng ký</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+                            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Đăng nhập</a>
+                        </li>
+                    }
+                    @if (User.IsInRole("admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="/admin/danhmucsanpham">Admin</a>
                         </li>
                         <li class="nav-item cta cta-colored"><a asp-controller="SanPham" asp-action="Cart" class="nav-link"><span class="icon-shopping_cart"></span></a></li>
                     }

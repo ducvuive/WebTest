@@ -162,5 +162,21 @@ namespace Test.Controllers
         {
             return _context.Cthd.Any(e => e.Mahd == id);
         }
+
+        public IActionResult CTHD(int mahd)
+        {
+
+            List<Cthd> listdata = _context.Cthd.Where(cthd => cthd.Mahd == mahd).Select(cthd => new Cthd
+            {
+                Mahd = cthd.Mahd,
+                Masp = cthd.Masp,
+                MahdNavigation = cthd.MahdNavigation,
+                MaspNavigation = cthd.MaspNavigation,
+                Soluong = cthd.Soluong,
+            }).ToList();
+
+
+            return View(listdata);
+        }
     }
 }

@@ -42,27 +42,34 @@
                 </div>
                 <p class="price"><span>@sanpham.Dongia?.ToString("#,##0 VNĐ")</span></p>
 
-
-                <div class="w-100"></div>
-                <div class="input-group col-md-6 d-flex mb-3">
-                    <span class="input-group-btn mr-2">
-                        <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
-                            <i class="ion-ios-remove"></i>
-                        </button>
-                    </span>
-                    <input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
-                    <span class="input-group-btn ml-2">
-                        <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
-                            <i class="ion-ios-add"></i>
-                        </button>
-                    </span>
-                </div>
-                <div class="w-100"></div>
-
-                <p>
+                <form asp-action="AddToCartQuantity" method="post">
+                    <div style="display:none">
+                        <input id="id" name="id" value="@sanpham.Masp" />
+                    </div>
+                    <div class="w-100"></div>
+                    <div class="input-group col-md-6 d-flex mb-3">
+                        <span class="input-group-btn mr-2">
+                            <button type="button" class="quantity-left-minus btn" data-type="minus" data-field="">
+                                <i class="ion-ios-remove"></i>
+                            </button>
+                        </span>
+                        <input type="text" id="quantity" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+                        <span class="input-group-btn ml-2">
+                            <button type="button" class="quantity-right-plus btn" data-type="plus" data-field="">
+                                <i class="ion-ios-add"></i>
+                            </button>
+                        </span>
+                    </div>
+                    <div class="w-100"></div>
+                    <p>
+                        <button type="submit">Thêm vào giỏ</button>
+                        @*<button type="submit">Mua ngay</button>*@     
+                    </p>
+                </form>
+                @*<p>
                     <a asp-action="AddToCart" asp-route-id="@sanpham.Masp" class="btn btn-black py-3 px-5 mr-2">Thêm vào giỏ</a>
                     <a asp-action="AddToCart" asp-route-id="@sanpham.Masp" class="btn btn-primary py-3 px-5">Mua ngay</a>
-                </p>
+                </p>*@
             </div>
 
         </div>

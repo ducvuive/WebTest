@@ -55,23 +55,52 @@ namespace Test.Areas.Admin.Controllers
         }
 
         // GET: Admin/HoaDon/Details/5
-        public async Task<IActionResult> Details(int? id)
+        //public async Task<IActionResult> Details(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    var cthd = await _context.Cthd
+        //        .Include(c => c.MahdNavigation)
+        //        .FirstOrDefaultAsync(m => m.Mahd == id);
+        //    if (cthd == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return View(cthd);
+        //}
+
+        public IActionResult Details(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
 
-            var cthd = await _context.Cthd
-                .Include(c => c.MahdNavigation)
-                .Include(c => c.MaspNavigation)
-                .FirstOrDefaultAsync(m => m.Mahd == id);
-            if (cthd == null)
+            List<Cthd> listdata = _context.Cthd.Where(cthd => cthd.Mahd == id).Select(cthd => new Cthd
             {
-                return NotFound();
-            }
+                Mahd = cthd.Mahd,
+                Masp = cthd.Masp,
+                MahdNavigation = cthd.MahdNavigation,
+                MaspNavigation = cthd.MaspNavigation,
+                Soluong = cthd.Soluong,
 
-            return View(cthd);
+            }).ToList();
+            foreach(var ct in listdata)
+            {
+                TempData["TongCong"] = ct.MahdNavigation.Tongtien?.ToString("#,##0 VND");
+            }
+            return View(listdata);
+        }
+        public IActionResult changeStatus(int mahd)
+        {
+            Hoadon result = (from hd in _context.Hoadon
+                             where hd.Mahd == mahd
+                             select hd).SingleOrDefault();
+
+            result.Trangthai++;
+
+            _context.SaveChanges();
+            return RedirectToAction("Index", new { trangthai = 0 });
         }
 
         //// GET: Admin/HoaDon/Create

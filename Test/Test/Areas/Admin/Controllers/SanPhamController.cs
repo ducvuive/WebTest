@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,6 +14,7 @@ using Test.Models;
 namespace Test.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "admin")]
     public class SanPhamController : Controller
     {
         private readonly LapTopContext _context;
@@ -44,19 +46,20 @@ namespace Test.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var sanpham = await _context.Sanpham
-                .Include(s => s.BoxulyNavigation)
-                .Include(s => s.CongketnoiNavigation)
-                .Include(s => s.DanhmucNavigation)
-                .Include(s => s.ManhinhNavigation)
-                .Include(s => s.RamNavigation)
-                .FirstOrDefaultAsync(m => m.Masp == id);
+            var sanpham = _context.Sanpham.Find(id);
+
+            ViewData["BXL"] = _context.Boxuly.Find(sanpham.Boxuly);
+            ViewData["RAM"] = _context.Bonhoram.Find(sanpham.Ram);
+            ViewData["MH"] = _context.Manhinh.Find(sanpham.Manhinh);
+            ViewData["CKN"] = _context.Congketnoi.Find(sanpham.Congketnoi);
+            ViewData["SanPham"] = sanpham;
             if (sanpham == null)
             {
                 return NotFound();
             }
 
             return View(sanpham);
+
         }
 
         // GET: Sanpham/Create
@@ -129,7 +132,7 @@ namespace Test.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Masp,Manhinh,Boxuly,Ram,Congketnoi,Danhmuc,Tensp,Soluong,Mausac,Ocung,Cardmanhinh,Dacbiet,Hdh,Thietke,KichthuocTrongluong,Webcam,Pin,Ramat,Mota,Dongia,Hinhanh")] Sanpham sanpham)
+        public async Task<IActionResult> Edit(string id, [Bind("Masp,Manhinh,Boxuly,Ram,Congketnoi,Danhmuc,Tensp,Soluong,Mausac,Ocung,Cardmanhinh,Dacbiet,Hdh,Thietke,KichthuocTrongluong,Webcam,Pin,Ramat,Mota,Dongia,HinhAnhFile")] Sanpham sanpham)
         {
             if (id != sanpham.Masp)
             {
@@ -140,6 +143,16 @@ namespace Test.Areas.Admin.Controllers
             {
                 try
                 {
+                    if (sanpham.HinhAnhFile != null)
+                    {
+                        string fullPath = Path.Combine(Directory.GetCurrentDirectory(),
+                                            "wwwroot", "HinhAnh", sanpham.HinhAnhFile.FileName);
+                        using (var file = new FileStream(fullPath, FileMode.Create))
+                        {
+                            sanpham.HinhAnhFile.CopyTo(file);
+                        }
+                        sanpham.Hinhanh = "/HinhAnh/" + sanpham.HinhAnhFile.FileName;
+                    }
                     _context.Update(sanpham);
                     await _context.SaveChangesAsync();
                     TempData["AlertMessage"] = "Cập nhật thành công";
@@ -209,7 +222,7 @@ namespace Test.Areas.Admin.Controllers
         [HttpPost]
         public JsonResult timSanPham(string id)
         {
-            var sp = _context.Sanpham.Find(id); 
+            var sp = _context.Sanpham.Find(id);
             return Json(sp);
         }
     }

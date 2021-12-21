@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-
+using Test.Models;
 namespace App.Admin.User
 {
 
@@ -15,8 +15,8 @@ namespace App.Admin.User
     [Authorize(Roles = "admin")]
     public class IndexModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        public IndexModel(UserManager<IdentityUser> userManager)
+        private readonly UserManager<AppUser> _userManager;
+        public IndexModel(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
         }
@@ -24,7 +24,7 @@ namespace App.Admin.User
         [TempData]
         public string StatusMessage { get; set; }
 
-        public class UserAndRole : IdentityUser
+        public class UserAndRole : AppUser
         {
             public string RoleNames { get; set; }
         }

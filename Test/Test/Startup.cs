@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Test.Data;
+using Test.Models;
 
 namespace Test
 {
@@ -31,13 +32,32 @@ namespace Test
             services.AddDbContext<LapTopContext>(options =>
                 options.UseMySQL(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+            /*services.AddIdentity<AppUser, IdentityRole> ()
+                .AddDefaultTokenProviders()
+                .AddDefaultUI()
+                .AddEntityFrameworkStores<LapTopContext>();
+             */
+               
+            services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<LapTopContext>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI();
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
             services.AddRazorPages();
+
+            services.AddDistributedMemoryCache();            // Đăng ký dịch vụ lưu cache trong bộ nhớ (Session sẽ sử dụng nó)
+            services.AddSession((option) =>
+            {                                                // Đăng ký dịch vụ Session
+                    option.Cookie.Name = "LaptopStore";             // Đặt tên Session - tên này sử dụng ở Browser (Cookie)
+                    option.IdleTimeout = new TimeSpan(0, 30, 0);    // Thời gian tồn tại của Session
+                });
+            services.AddSession((option) =>
+            {                                                // Đăng ký dịch vụ Session
+                option.Cookie.Name = "LaptopStore";             // Đặt tên Session - tên này sử dụng ở Browser (Cookie)
+                option.IdleTimeout = new TimeSpan(0, 30, 0);    // Thời gian tồn tại của Session
+            });
+
 
             services.Configure<IdentityOptions>(options =>
             {
@@ -56,6 +76,7 @@ namespace Test
 
                 // User settings
                 options.User.RequireUniqueEmail = true;
+                options.SignIn.RequireConfirmedAccount = true;
             });
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }
@@ -77,11 +98,14 @@ namespace Test
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
+            app.UseSession();
+
             app.UseRouting();
 
             app.UseAuthentication();
             app.UseAuthorization();
-
+            
+            app.UseSession();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

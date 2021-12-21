@@ -10,20 +10,20 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-
+using Test.Models;
 namespace App.Admin.User
 {
     [Authorize(Roles = "admin")]
     public class AddRoleModel : PageModel
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
 
         private readonly RoleManager<IdentityRole> _roleManager;
 
         public AddRoleModel(
-            UserManager<IdentityUser> userManager,
-            SignInManager<IdentityUser> signInManager,
+            UserManager<AppUser> userManager,
+            SignInManager<AppUser> signInManager,
             RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
@@ -36,7 +36,7 @@ namespace App.Admin.User
         [TempData]
         public string StatusMessage { get; set; }
     
-        public IdentityUser user { get; set; }
+        public AppUser user { get; set; }
 
         [BindProperty]
         [DisplayName("Các role gán cho user")]

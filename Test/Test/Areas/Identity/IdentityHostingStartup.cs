@@ -19,7 +19,7 @@ namespace Test.Areas.Identity
                     options.UseSqlServer(
                         context.Configuration.GetConnectionString("TestContextConnection")));
 
-                /*services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                /*services.AddDefaultIdentity<AppUser>(options => options.SignIn.RequireConfirmedAccount = true)
                     .AddEntityFrameworkStores<TestContext>();*/
             });
         }

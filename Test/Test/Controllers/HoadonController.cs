@@ -168,5 +168,97 @@ namespace Test.Controllers
         {
             return _context.Hoadon.Any(e => e.Mahd == id);
         }
+
+        //Lay hóa đơn trạng thái chờ xác nhận
+        public IActionResult HDChoXN()
+        {
+
+            List<Hoadon> listdata = _context.Hoadon.Where(hd => hd.Trangthai == 0).Select(hd => new Hoadon
+            {
+                Mahd = hd.Mahd,
+                Makh = hd.Makh,
+                Mask = hd.Mask,
+                Ngayhd = hd.Ngayhd,
+                Nguoinhan = hd.Nguoinhan,
+                nhanvienmanv = hd.nhanvienmanv,
+                Sdt = hd.Sdt,
+                Diachigiaohang =hd.Diachigiaohang,
+                Tongtien = hd.Tongtien,
+                Thanhtien = hd.Thanhtien,
+
+            }).ToList();
+
+
+            return View(listdata);
+        }
+
+        //Lấy hóa đơn trạng thái đã xác nhận
+        public IActionResult HDXN()
+        {
+
+            List<Hoadon> listdata = _context.Hoadon.Where(hd => hd.Trangthai == 1).Select(hd => new Hoadon
+            {
+                Mahd = hd.Mahd,
+                Makh = hd.Makh,
+                Mask = hd.Mask,
+                Ngayhd = hd.Ngayhd,
+                Nguoinhan = hd.Nguoinhan,
+                nhanvienmanv = hd.nhanvienmanv,
+                Sdt = hd.Sdt,
+                Diachigiaohang = hd.Diachigiaohang,
+                Tongtien = hd.Tongtien,
+                Thanhtien = hd.Thanhtien,
+
+            }).ToList();
+
+
+            return View(listdata);
+        }
+
+        //Lay hóa đơn trạng thái đang giao
+        public IActionResult HDDangGiao()
+        {
+
+            List<Hoadon> listdata = _context.Hoadon.Where(hd => hd.Trangthai == 2).Select(hd => new Hoadon
+            {
+                Mahd = hd.Mahd,
+                Makh = hd.Makh,
+                Mask = hd.Mask,
+                Ngayhd = hd.Ngayhd,
+                Nguoinhan = hd.Nguoinhan,
+                nhanvienmanv = hd.nhanvienmanv,
+                Sdt = hd.Sdt,
+                Diachigiaohang = hd.Diachigiaohang,
+                Tongtien = hd.Tongtien,
+                Thanhtien = hd.Thanhtien,
+
+            }).ToList();
+
+
+            return View(listdata);
+        }
+
+        //Lay hóa đơn trạng thái đã giao
+        public IActionResult HDDaGiao()
+        {
+
+            List<Hoadon> listdata = _context.Hoadon.Where(hd => hd.Trangthai == 3).Select(hd => new Hoadon
+            {
+                Mahd = hd.Mahd,
+                Makh = hd.Makh,
+                Mask = hd.Mask,
+                Ngayhd = hd.Ngayhd,
+                Nguoinhan = hd.Nguoinhan,
+                nhanvienmanv = hd.nhanvienmanv,
+                Sdt = hd.Sdt,
+                Diachigiaohang = hd.Diachigiaohang,
+                Tongtien = hd.Tongtien,
+                Thanhtien = hd.Thanhtien,
+
+            }).ToList();
+
+
+            return View(listdata);
+        }
     }
 }

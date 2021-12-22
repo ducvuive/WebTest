@@ -37,25 +37,22 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.Ngayhd)
+                                Ngày hóa đơn
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Nguoinhan)
+                               Người nhận
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Sdt)
+                                Số điện thoại
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Diachigiaohang)
+                                Địa chỉ giao hàng
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Tongtien)
+                                Tổng tiền
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.Thanhtien)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.Trangthai)
+                                Trạng thái
                             </th>
                             <th>
                                 Tác vụ
@@ -67,7 +64,7 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Ngayhd)
+                                    @item.Ngayhd?.ToString("dd/MM/yyyy")
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Nguoinhan)
@@ -79,28 +76,18 @@
                                     @Html.DisplayFor(modelItem => item.Diachigiaohang)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.Tongtien)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Thanhtien)
+                                    @item.Tongtien?.ToString("#,##0 VND")
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Trangthai)
                                 </td>
                                 <td>
-                                    <a asp-action="Details" asp-route-id="@item.Mahd" class="btn btn-info">Chi tiết</a>
-                                    @if (item.Trangthai == 0)
+                                    <a asp-controller="HoaDon" asp-action="Details" asp-route-id="@item.Mahd" class="btn btn-info">Chi tiết</a>
+                                    @if (item.Trangthai != 3)
                                     {
-                                        <button class="btn btn-warning">Xác nhận đơn hàng</button>
+                                        <a asp-controller="HoaDon" asp-action="changeStatus" asp-route-mahd="@item.Mahd" class="btn btn-warning">Xác nhận đơn hàng</a>
                                     }
-                                    @if (item.Trangthai == 0 || item.Trangthai == 1)
-                                    {
-                                        <button class="btn btn-success">Xác nhận đang giao</button>
-                                    }
-                                    @if (item.Trangthai == 0 || item.Trangthai == 1 || item.Trangthai == 2)
-                                    {
-                                        <button class="btn btn-info">Xác nhận đã giao</button>
-                                    }
+                                    
                                 </td>
                             </tr>
                         }

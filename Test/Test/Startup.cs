@@ -76,7 +76,8 @@ namespace Test
 
                 // User settings
                 options.User.RequireUniqueEmail = true;
-                options.SignIn.RequireConfirmedAccount = true;
+                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedAccount = false;
             });
             services.AddMvc(options => options.EnableEndpointRouting = false);
         }

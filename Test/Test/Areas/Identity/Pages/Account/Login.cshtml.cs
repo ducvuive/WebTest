@@ -97,7 +97,7 @@ namespace Test.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Tên đăng nhập hoặc mật khẩu không đúng");
+                    ModelState.AddModelError(string.Empty, "Tên đăng nhập hoặc mật khẩu bị sai");
                     return Page();
                 }
             }

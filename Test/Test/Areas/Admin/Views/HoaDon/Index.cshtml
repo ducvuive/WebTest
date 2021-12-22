@@ -62,34 +62,48 @@
                     <tbody>
                         @foreach (var item in Model)
                         {
-                            <tr>
-                                <td>
-                                    @item.Ngayhd?.ToString("dd/MM/yyyy")
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Nguoinhan)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Sdt)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Diachigiaohang)
-                                </td>
-                                <td>
-                                    @item.Tongtien?.ToString("#,##0 VND")
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Trangthai)
-                                </td>
-                                <td>
-                                    <a asp-controller="HoaDon" asp-action="Details" asp-route-id="@item.Mahd" class="btn btn-info">Chi tiết</a>
-                                    @if (item.Trangthai != 3)
-                                    {
-                                        <a asp-controller="HoaDon" asp-action="changeStatus" asp-route-mahd="@item.Mahd" class="btn btn-warning">Xác nhận đơn hàng</a>
-                                    }
-                                    
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>
+                                @item.Ngayhd?.ToString("dd/MM/yyyy")
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nguoinhan)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Sdt)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Diachigiaohang)
+                            </td>
+                            <td>
+                                @item.Tongtien?.ToString("#,##0 VND")
+                            </td>
+                            @if (@item.Trangthai == 0)
+                            {
+                                <td>Chưa xác nhận</td>
+                            }
+                            else if (@item.Trangthai == 1)
+                            {
+                                <td>Đã xác nhận</td>
+                            }
+                            else if (@item.Trangthai == 2)
+                            {
+                                <td>Đang giao hàng</td>
+                            }
+                            else
+                            {
+                                <td>Đã giao hàng</td>
+
+                            }
+                            <td>
+                                <a asp-controller="HoaDon" asp-action="Details" asp-route-id="@item.Mahd" class="btn btn-info">Chi tiết</a>
+                                @if (item.Trangthai != 3)
+                                {
+                                    <a asp-controller="HoaDon" asp-action="changeStatus" asp-route-mahd="@item.Mahd" class="btn btn-warning">Xác nhận đơn hàng</a>
+                                }
+
+                            </td>
+                        </tr>
                         }
                     </tbody>
                 </table>

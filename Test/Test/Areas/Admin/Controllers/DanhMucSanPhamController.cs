@@ -146,12 +146,22 @@ namespace Test.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string Madm)
         {
+            try
+            {
+
             var danhmucsanpham = await _context.Danhmucsanpham.FindAsync(Madm);
             _context.Danhmucsanpham.Remove(danhmucsanpham);
             await _context.SaveChangesAsync();
             TempData["AlertMessage"] = "Xóa thành công";
             TempData["AlertType"] = "alert alert-success";
             return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                TempData["AlertMessage"] = "Xóa không thành công";
+                TempData["AlertType"] = "alert alert-danger";
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         private bool DanhmucsanphamExists(string id)

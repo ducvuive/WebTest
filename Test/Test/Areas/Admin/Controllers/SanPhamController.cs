@@ -207,12 +207,22 @@ namespace Test.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(string Masp)
         {
-            var sanpham = await _context.Sanpham.FindAsync(Masp);
-            _context.Sanpham.Remove(sanpham);
-            await _context.SaveChangesAsync();
-            TempData["AlertMessage"] = "Xóa thành công";
-            TempData["AlertType"] = "alert alert-success";
-            return RedirectToAction(nameof(Index));
+            try
+            {
+                var sanpham = await _context.Sanpham.FindAsync(Masp);
+                _context.Sanpham.Remove(sanpham);
+                await _context.SaveChangesAsync();
+                TempData["AlertMessage"] = "Xóa thành công";
+                TempData["AlertType"] = "alert alert-success";
+                return RedirectToAction(nameof(Index));
+
+            }
+            catch
+            {
+                TempData["AlertMessage"] = "Xóa không thành công";
+                TempData["AlertType"] = "alert alert-danger";
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         private bool SanphamExists(string id)

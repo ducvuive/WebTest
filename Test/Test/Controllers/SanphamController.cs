@@ -471,9 +471,11 @@ namespace Test.Controllers
             return RedirectToAction(nameof(Cart));
         }
 
-        public IActionResult AddToCartQuanTiTy([FromRoute] string id, [FromRoute] int quantity )
+        [HttpPost]
+        public IActionResult AddToCartQuantity([FromForm] string id, [FromForm] int quantity )
         {
-
+            Console.WriteLine("{0} is", id);
+            Console.WriteLine("{0} q", quantity);
             var sanpham = _context.Sanpham
                 .Where(p => p.Masp == id)
                 .FirstOrDefault();
@@ -587,6 +589,7 @@ namespace Test.Controllers
                 hd.Nguoinhan = hoten;
                 hd.Diachigiaohang = diachi;
                 hd.Sdt = sdt;
+                hd.Ngayhd = DateTime.Now;
                 var user = await GetCurrentUser();
                 hd.Makh = user.Id;
                 foreach (var item in cart)

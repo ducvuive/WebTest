@@ -557,8 +557,13 @@ namespace Test.Controllers
             return RedirectToAction(nameof(Cart));
         }
 
-        public IActionResult CheckOut([FromForm] string email, [FromForm] string address)
+        public async Task<IActionResult> CheckOutAsync([FromForm] string email, [FromForm] string address)
         {
+            var user = await GetCurrentUser();
+            if (user==null)
+            {
+                return Redirect("/Identity/Account/Login");
+            } 
             var cart = GetCartItems();
 
             return View(cart);

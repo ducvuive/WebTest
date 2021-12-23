@@ -231,7 +231,7 @@ namespace Test.Controllers
 
             var user = await GetCurrentUser();
             string id = user.Id;
-            List<Hoadon> listdata = _context.Hoadon.Where(hd => hd.Trangthai == 0).Where(hd => hd.Makh == id).Select(hd => new Hoadon
+            List<Hoadon> listdata = _context.Hoadon.Where(hd => hd.Trangthai == 2).Where(hd => hd.Makh == id).Select(hd => new Hoadon
             {
                 Mahd = hd.Mahd,
                 Makh = hd.Makh,
@@ -256,7 +256,7 @@ namespace Test.Controllers
 
             var user = await GetCurrentUser();
             string id = user.Id;
-            List<Hoadon> listdata = _context.Hoadon.Where(hd => hd.Trangthai == 0).Where(hd => hd.Makh == id).Select(hd => new Hoadon
+            List<Hoadon> listdata = _context.Hoadon.Where(hd => hd.Trangthai == 3).Where(hd => hd.Makh == id).Select(hd => new Hoadon
             {
                 Mahd = hd.Mahd,
                 Makh = hd.Makh,

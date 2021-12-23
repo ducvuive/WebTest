@@ -367,47 +367,65 @@ namespace Test.Controllers
             return list;
 
         }
-
+        
         // GET: Sanpham
-        public async Task<IActionResult> Shop(string madm, int page)
+        public IActionResult Shop(string madm, int page, string tensp)
         {
-            var lapTopContext = _context.Sanpham.Include(s => s.BoxulyNavigation).Include(s => s.CongketnoiNavigation).Include(s => s.DanhmucNavigation).Include(s => s.ManhinhNavigation).Include(s => s.RamNavigation);
             List<Sanpham> spList = new List<Sanpham>();
+            var lapTopContext = _context.Sanpham.Include(s => s.BoxulyNavigation).Include(s => s.CongketnoiNavigation).Include(s => s.DanhmucNavigation).Include(s => s.ManhinhNavigation).Include(s => s.RamNavigation);
             double totalPage;
-            if (string.IsNullOrEmpty(madm))
-            {
-                spList = lapTopContext.ToList();
-                float temp = spList.Count() / (float)12;
-                totalPage = Math.Ceiling(temp);
-                if (page == 0)
+            if (string.IsNullOrEmpty(tensp)) 
+            { 
+                if (string.IsNullOrEmpty(madm))
                 {
-                    spList = spList.Take(12).ToList();
+                    spList = lapTopContext.ToList();
+                    float temp = spList.Count() / (float)12;
+                    totalPage = Math.Ceiling(temp);
+                    if (page == 0)
+                    {
+                        spList = spList.Take(12).ToList();
+                    }
+                    else
+                    {
+                        spList = LayDSSPTheoTrang(page);
+                    }
                 }
                 else
                 {
-                    spList = LayDSSPTheoTrang(page);
+                    spList = LayDSSPTheoDanhMuc(madm);
+                    float temp = spList.Count() / (float)12;
+                    totalPage = Math.Ceiling(temp);
+                    if (page == 0)
+                    {
+                        spList = spList.Take(12).ToList();
+                    }
+                    else
+                    {
+                        spList = LayDSSPTheoDanhMucTheoTrang(madm, page);
+                    }
                 }
+
+                ViewBag.dmSP = _context.Danhmucsanpham.ToList();
+                ViewBag.totalPage = totalPage;
+                ViewBag.pageCurrent = page;
             }
             else
             {
-                spList = LayDSSPTheoDanhMuc(madm);
-                float temp = spList.Count() / (float)12;
-                totalPage = Math.Ceiling(temp);
-                if (page == 0)
+                tensp = tensp.Trim().ToLower();
+                string _tensp = "";
+                List<Sanpham> contextSP = lapTopContext.ToList();
+                foreach (Sanpham item in contextSP)
                 {
-                    spList = spList.Take(12).ToList();
+                    _tensp = item.Tensp.Trim().ToLower();
+                    if (_tensp.Contains(tensp))
+                    {
+                        spList.Add(item);
+                    }
+
                 }
-                else
-                {
-                    spList = LayDSSPTheoDanhMucTheoTrang(madm, page);
-                }
+                ViewBag.dmSP = _context.Danhmucsanpham.ToList();
             }
-
-            ViewBag.dmSP = _context.Danhmucsanpham.ToList();
-            ViewBag.totalPage = totalPage;
-            ViewBag.pageCurrent = page;
             return View(spList);
-
         }
 
         // GET: Sanpham/Details/5

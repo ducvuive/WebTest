@@ -59,8 +59,8 @@ namespace Test.Areas.Identity.Pages.Account
 
                 await _emailSender.SendEmailAsync(
                     Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                     "Đặt lại mật khẩu",
+                    $"Để đặt lại mật khẩu hãy <a href='{callbackUrl}'>bấm vào đây</a>.");
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }

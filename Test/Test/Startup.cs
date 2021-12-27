@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -63,11 +64,11 @@ namespace Test
             {
                 // Password settings
                 options.Password.RequireDigit = true;//yeu cau so 0-9
-                options.Password.RequiredLength = 3;
+                options.Password.RequiredLength = 6;
                 options.Password.RequireNonAlphanumeric = true;// co ki tu dac biet
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
-                options.Password.RequiredUniqueChars = 6;
+                options.Password.RequiredUniqueChars = 1;
 
                 // Lockout settings
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
@@ -77,9 +78,14 @@ namespace Test
                 // User settings
                 options.User.RequireUniqueEmail = true;
                 options.SignIn.RequireConfirmedEmail = false;
-                options.SignIn.RequireConfirmedAccount = false;
+                options.SignIn.RequireConfirmedAccount = true;
             });
             services.AddMvc(options => options.EnableEndpointRouting = false);
+
+            services.AddOptions();                                         // Kích hoạt Options
+            var mailsettings = Configuration.GetSection("MailSettings");  // đọc config
+            services.Configure<MailSettings>(mailsettings);                // đăng ký để Inject
+            services.AddSingleton<IEmailSender, SendMailService>();
         }
             
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
